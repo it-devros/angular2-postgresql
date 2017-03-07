@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cornflourblue/angular2-registration-login-example.git"
+        "url": "https://github.com/assassin94mean/orderSYS-Angular2-Postgresql.git"
     },
     "scripts": {
         "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",

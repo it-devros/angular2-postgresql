@@ -1,0 +1,71 @@
+<div class="col-md-12">
+    <a [routerLink]="['/']"><h2>Hi {{ currentUser.firstName }}!</h2></a>
+    <p>You can purchase order right now.<a style="float: right;" [routerLink]="['/login']">Logout</a></p>
+    
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul id="nav_bar" class="nav navbar-nav">
+                <li><a href="javascript:void(0)">Select Supplier</a></li>
+                <li><a href="javascript:void(0)">Select Material</a></li>
+                <li class="active"><a href="javascript:void(0)">Order Quantities</a></li>
+                <li><a href="javascript:void(0)">Finalize</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="col-md-8">
+            <h4>New Order : SupplierA</h4>
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-12">
+                Total Amount : $2930203
+            </div>
+            <div class="col-md-12">
+                Date : 3/20/2017
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <td>Code</td>
+                    <td>Materials</td>
+                    <td>Material Types</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                    <td>TOT</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0001</td>
+                    <td>brick ast</td>
+                    <td>brick</td>
+                    <td>$12</td>
+                    <td>
+                        <input type="number" class="form form-control" value="quantity">
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>0001</td>
+                    <td>brick ast</td>
+                    <td>brick</td>
+                    <td>$12</td>
+                    <td>
+                        <input type="number" class="form form-control" value="quantity">
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container-fluid">
+        <button id="btn_continue" class="btn btn-primary" [routerLink]="['/finalize']">Continue</button>
+    </div>
+
+</div>
