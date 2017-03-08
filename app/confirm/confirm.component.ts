@@ -5,10 +5,10 @@ import { UserService } from '../_services/index';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'quantity.component.html'
+    templateUrl: 'confirm.component.html'
 })
 
-export class QuantityComponent implements OnInit {
+export class ConfirmComponent implements OnInit {
     currentUser: User;
     users: User[] = [];
 

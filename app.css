@@ -30,3 +30,11 @@ thead {
     padding-bottom: 20px;
 }
 
+#dispatch_info {
+    padding:0px;
+    padding-bottom:20px;
+}
+
+#dispatch_label {
+    padding-top:5px;
+}

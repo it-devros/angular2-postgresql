@@ -1,0 +1,68 @@
+<div class="col-md-12">
+    <a [routerLink]="['/']"><h2>Hi {{ currentUser.firstName }}!</h2></a>
+    <p>You can dispatch goods receipt right now.<a style="float: right;" [routerLink]="['/login']">Logout</a></p>
+    
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul id="nav_bar" class="nav navbar-nav">
+                <li><a href="javascript:void(0)">Select Supplier</a></li>
+                <li><a href="javascript:void(0)">Indicate Purchase Order</a></li>
+                <li><a href="javascript:void(0)">Goods Receipt</a></li>
+                <li class="active"><a href="javascript:void(0)">Confirm</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="col-md-7">
+             SupplierA PO Date : 12/11/2016
+        </div>
+        <div class="col-md-5">
+            <div class="col-md-12">
+                Dispatch Date : 12/11/2016
+            </div>
+            <div class="col-md-12">
+                Dispatch Number : 23942304
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <td>Material Number</td>
+                    <td>Description</td>
+                    <td>Requested Quantity</td>
+                    <td>Pending Quantity</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>003403</td>
+                    <td>Brick Sta</td>
+                    <td>2934023</td>
+                    <td>23423443</td>
+                </tr>
+                <tr>
+                    <td>003403</td>
+                    <td>Brick Sta</td>
+                    <td>2934023</td>
+                    <td>23423443</td>
+                </tr>
+                <tr>
+                    <td>003403</td>
+                    <td>Brick Sta</td>
+                    <td>2934023</td>
+                    <td>23423443</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container-fluid">
+        <button id="btn_back" class="btn btn-primary" [routerLink]="['/receipt']">Back</button>
+        <button id="btn_confirm" class="btn btn-primary" [routerLink]="['/']">Confirm</button>
+    </div>
+
+</div>

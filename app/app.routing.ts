@@ -7,6 +7,11 @@ import { AuthGuard } from './_guards/index';
 import { MaterialComponent } from './material/index';
 import { QuantityComponent } from './quantity/index';
 import { FinalizeComponent } from './finalize/index';
+import { DispatchComponent } from './dispatch/index';
+import { IndicateComponent } from './indicate/index';
+import { ReceiptComponent } from './receipt/index';
+import { ConfirmComponent } from './confirm/index';
+
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -15,6 +20,10 @@ const appRoutes: Routes = [
     { path: 'material', component: MaterialComponent },
     { path: 'quantity', component: QuantityComponent },
     { path: 'finalize', component: FinalizeComponent },
+    { path: 'dispatch', component: DispatchComponent },
+    { path: 'indicate', component: IndicateComponent },
+    { path: 'receipt', component: ReceiptComponent },
+    { path: 'confirm', component: ConfirmComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
