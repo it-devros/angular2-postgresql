@@ -6,7 +6,7 @@ var config = require('./config'),
 module.exports = function() {
     var db = mongoose.connect(config.db);
 
-    require('../app/models/todo.server.model'); // model name
+    require('../app/models/damian.server.model'); // model name
 
     return db;
 }    

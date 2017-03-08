@@ -15,7 +15,11 @@
 
 <div class="col-md-12">
     <a [routerLink]="['/']"><h2>Hi {{ currentUser.firstName }}!</h2></a>
-    <p>You can purchase order right now.<a style="float: right;" [routerLink]="['/login']">Logout</a></p>
+    <p class="top_nav">You can purchase order right now.<br>
+        <a [routerLink]="['/']" style="float: left;">Purchase&nbsp;&nbsp;&nbsp;</a>
+        <a [routerLink]="['/']" style="float: left;">Dispatch</a>
+        <a style="float: right;" [routerLink]="['/login']">Logout</a>
+    </p>
     
     <nav class="navbar navbar-default">
         <div class="container-fluid">

@@ -1,12 +1,12 @@
-/* File: server/app/models/todo.server.model.js */
+/* File: server/app/models/damian.server.model.js */
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var TodoSchema = new Schema({
+var DamianSchema = new Schema({
     id: String,
     title: String,
     completed: Boolean
 });
 
-mongoose.model('Todo', TodoSchema);
+mongoose.model('Damian', DamianSchema);
