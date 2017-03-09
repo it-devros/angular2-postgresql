@@ -29,13 +29,14 @@ export class RegisterComponent {
                     }
                     if (data.command == 'SELECT')
                     {
+                        console.log("failed");
                         this.alertService.error('Registration failed because there is your email already.');
                         this.loading = false;
                     }
                 },
                 error => {
                     console.log(error);
-                    this.alertService.error('Registration Failed.');
+                    this.alertService.error('Registration failed because there is your email already.');
                     this.loading = false;
                 });
     }

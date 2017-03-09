@@ -10,6 +10,7 @@ import { UserService, AuthenticationService, PurchaseService } from '../_service
 
 export class HomeComponent implements OnInit {
     currentUser: any;
+    // suppliers: Supplier[] = [];
     suppliers: Supplier[] = [];
     users: User[] = [];
 
@@ -21,8 +22,7 @@ export class HomeComponent implements OnInit {
         let user = JSON.parse(localStorage.getItem('currentUser'));
         console.log(user);
         this.currentUser = user;
-        let supplies = this.purchase.getSuppliers();
-        console.log(supplies);
+        this.purchase.getSuppliers().subscribe((data) => { this.suppliers = data });;
         // this.currentUser = this.auth.getCurrentUser();
     }
 

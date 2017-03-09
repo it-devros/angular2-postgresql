@@ -48,7 +48,7 @@ module.exports = function() {
                 return console.error('error running query', err);
             }
             console.log(result.rows);
-            res.send(result.rows[0]);
+            res.send(result.rows);
             });
         });
     });
@@ -82,7 +82,7 @@ module.exports = function() {
                 else
                 {
                     console.log(result);
-                    res.send(result);
+                    res.send(err);
                 }
             });
             
@@ -106,7 +106,15 @@ module.exports = function() {
                 if (err) {
                     return console.error('There are no users like email or password.', err);
                 }
-                res.send(result.rows[0]);
+                if (result.rows.length == 0)
+                {
+                    res.send(err);
+                }
+                else
+                {
+                    res.send(result.rows[0]);
+                }
+                
             });
 
         });

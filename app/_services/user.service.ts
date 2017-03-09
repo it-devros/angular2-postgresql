@@ -18,7 +18,10 @@ export class UserService {
 
     create(user: User) {
         console.log('create');
-        return this.http.post('http://localhost:3000/api/users', user).map((response: Response) => response.json());
+        return this.http.post('http://localhost:3000/api/users', user).map((response: Response) => {
+            let result = response.json();
+            return result;
+        });
     }
 
     update(user: User) {

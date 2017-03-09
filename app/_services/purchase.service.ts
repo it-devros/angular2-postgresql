@@ -11,12 +11,7 @@ export class PurchaseService {
 
     getSuppliers() {
         console.log("supplier");
-        return this.http.get('http://localhost:3000/api/suppliers').map((response: Response) => {
-            console.log("supplier-ok");
-            let suppliers = response.json();
-            console.log(suppliers);
-            return response["_body"];
-        });
+        return this.http.get('http://localhost:3000/api/suppliers').map((response: Response) => response.json());
     }
 
 }

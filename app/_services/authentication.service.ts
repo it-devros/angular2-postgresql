@@ -13,20 +13,7 @@ export class AuthenticationService {
     ) { }
     login(user: User) {
         return this.http.post('http://localhost:3000/api/authenticate', user)
-            .map((response: Response) => {
-                console.log(response);
-                let userdata = response.json();
-                if (Object.keys(userdata).length == 0 ) {
-                    return false;
-                }
-                else
-                {
-                    this.setUser(userdata);
-                    localStorage.setItem('currentUser', response["_body"]);
-                    return userdata;
-                }
-                
-            });
+            .map((response: Response) => response.json());
     }
 
     logout() {
