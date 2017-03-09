@@ -1,21 +1,31 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
+import { User } from '../_models/index';
 
 @Injectable()
 export class AuthenticationService {
-    constructor(private http: Http) { }
+    public user_temp: any;
 
-    login(username: string, password: string) {
-        return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
+    constructor(
+        private http: Http
+    ) { }
+    login(user: User) {
+        return this.http.post('http://localhost:3000/api/authenticate', user)
             .map((response: Response) => {
-                // login successful if there's a jwt token in the response
-                let user = response.json();
-                if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+                console.log(response);
+                let userdata = response.json();
+                if (Object.keys(userdata).length == 0 ) {
+                    return false;
                 }
+                else
+                {
+                    this.setUser(userdata);
+                    localStorage.setItem('currentUser', response["_body"]);
+                    return userdata;
+                }
+                
             });
     }
 
@@ -23,4 +33,15 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
     }
+
+    setUser(user_temp:any) {
+
+        this.user_temp = user_temp;
+    }
+
+    getCurrentUser() {
+        return this.user_temp;
+    }
+
+    
 }

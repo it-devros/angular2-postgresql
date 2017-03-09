@@ -1,16 +1,6 @@
-/* File: server/server.js */
+var express = require('./routes/index');
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
-// creates an instance our express created inside config,
-// completely different from var express = require('exoress')
-var express = require('./config/express'),
-		mongoose = require('./config/mongoose');
-
-// the expressmethod created in ./config/express
-// returns an express application
-var db = mongoose(),
-    app = express();
+var app = express();
 
 app.listen(3000);
 module.exports = app;

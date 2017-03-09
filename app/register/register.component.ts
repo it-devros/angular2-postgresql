@@ -21,11 +21,21 @@ export class RegisterComponent {
         this.userService.create(this.model)
             .subscribe(
                 data => {
-                    this.alertService.success('Registration successful', true);
-                    this.router.navigate(['/login']);
+                    console.log(data);
+                    if (data.command == 'INSERT')
+                    {
+                        this.alertService.success('Registration successful', true);
+                        this.router.navigate(['/login']);
+                    }
+                    if (data.command == 'SELECT')
+                    {
+                        this.alertService.error('Registration failed because there is your email already.');
+                        this.loading = false;
+                    }
                 },
                 error => {
-                    this.alertService.error(error);
+                    console.log(error);
+                    this.alertService.error('Registration Failed.');
                     this.loading = false;
                 });
     }

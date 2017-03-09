@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
-import { User } from '../_models/index';
-import { UserService } from '../_services/index';
+import { User, Supplier } from '../_models/index';
+import { UserService, AuthenticationService, PurchaseService } from '../_services/index';
 
 @Component({
     moduleId: module.id,
@@ -9,11 +9,21 @@ import { UserService } from '../_services/index';
 })
 
 export class HomeComponent implements OnInit {
-    currentUser: User;
+    currentUser: any;
+    suppliers: Supplier[] = [];
     users: User[] = [];
 
-    constructor(private userService: UserService) {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    constructor(private userService: UserService,
+                private auth: AuthenticationService,
+                private purchase: PurchaseService) {
+        console.log(localStorage.getItem('currentUser'));
+        // this.currentUser = localStorage.getItem('currentUser');
+        let user = JSON.parse(localStorage.getItem('currentUser'));
+        console.log(user);
+        this.currentUser = user;
+        let supplies = this.purchase.getSuppliers();
+        console.log(supplies);
+        // this.currentUser = this.auth.getCurrentUser();
     }
 
     ngOnInit() {

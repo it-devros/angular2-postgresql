@@ -1,6 +1,6 @@
 ﻿
 <div class="col-md-12">
-    <a [routerLink]="['/']"><h2>Hi {{ currentUser.firstName }}!</h2></a>
+    <a [routerLink]="['/']"><h2>Hi {{ currentUser.first_name }}!</h2></a>
     <p class="top_nav">You can purchase order right now.<br>
         <a [routerLink]="['/']" style="float: left;">Purchase&nbsp;&nbsp;&nbsp;</a>
         <a [routerLink]="['/dispatch']" style="float: left;">Dispatch</a>
@@ -27,17 +27,14 @@
                     <td>Select</td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let supplier of suppliers">
+
                 <tr>
-                    <td>0001</td>
-                    <td>supplier A </td>
-                    <td><input type="radio" class=""></td>
+                    <td>{{ supplier.cuit }}</td>
+                    <td>{{ supplier.full_name }}</td>
+                    <td><input name="stl_{{ supplier.contact }}" type="radio" class=""></td>
                 </tr>
-                <tr>
-                    <td>0001</td>
-                    <td>supplier A </td>
-                    <td><input type="radio" class=""></td>
-                </tr>
+                
             </tbody>
         </table>
     </div>
