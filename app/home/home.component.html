@@ -9,11 +9,11 @@
     
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <ul id="nav_bar" class="nav navbar-nav">
-                <li class="active"><a href="javascript:void(0)">Select Supplier</a></li>
-                <li><a href="javascript:void(0)">Select Material</a></li>
-                <li><a href="javascript:void(0)">Order Quantities</a></li>
-                <li><a href="javascript:void(0)">Finalize</a></li>
+            <ul id="nav_bar" class="nav navbar-nav col-md-12 text-center">
+                <li class="active col-md-3"><a class="col-md-12" href="javascript:void(0)">Select Supplier</a></li>
+                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Select Material</a></li>
+                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Order Quantities</a></li>
+                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Finalize</a></li>
             </ul>
         </div>
     </nav>
@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{ supplier.cuit }}</td>
                     <td>{{ supplier.full_name }}</td>
-                    <td><input name="stl_{{ supplier.contact }}" type="radio" class=""></td>
+                    <td><input class="radio" name="optradio" type="radio" (click)=selectSupplier(supplier)></td>
                 </tr>
                 
             </tbody>
@@ -40,7 +40,7 @@
     </div>
 
     <div class="container-fluid">
-        <button id="btn_continue" class="btn btn-primary" [routerLink]="['/material']">Continue</button>
+        <button id="btn_continue" class="btn btn-primary" (click)=goMaterial()>Continue</button>
     </div>
 
 </div>

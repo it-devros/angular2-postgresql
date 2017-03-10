@@ -38,3 +38,7 @@ thead {
 #dispatch_label {
     padding-top:5px;
 }
+
+li {
+    padding-right: 0px !important;
+}

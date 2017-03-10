@@ -35,7 +35,7 @@ module.exports = function() {
     var conString = 'postgres://postgres:postgres@localhost/damian';
 
     //Users
-    //get all users
+    //get all suppliers
     router.get('/api/suppliers', function(req, res, next) {
         pg.connect(conString, function(err, client, done) {
             if (err) {
@@ -48,7 +48,14 @@ module.exports = function() {
                 return console.error('error running query', err);
             }
             console.log(result.rows);
-            res.send(result.rows);
+            if (result.rows.length == 0)
+            {
+                res.send(err);
+            }
+            else{
+                res.send(result.rows);
+            }
+            
             });
         });
     });
@@ -121,18 +128,117 @@ module.exports = function() {
     });
 
     //get one user
-    router.get('/users/:id', function(req, res, next) {
+    router.get('/api/suppliers_materials:id', function(req, res, next) {
     pg.connect(conString, function(err, client, done) {
         if (err) {
         return console.error('error fetching client from pool', err);
         }
         console.log("connected to database");
-        client.query('SELECT * FROM users WHERE id = $1', [req.params.id], function(err, result) {
-        done();
+        client.query('SELECT * FROM suppliers_materials WHERE id_supplier = $1', [req.params.id], function(err, result) {
+            done();
+            if (err) {
+                return console.error('error running query', err);
+            }
+            if (result.rows.length == 0)
+            {
+                res.send(err);
+            }
+            else{
+                res.send(result.rows);
+            }
+            
+        });
+    });
+    });
+
+    router.get('/api/materials', function(req, res, next) {
+    pg.connect(conString, function(err, client, done) {
         if (err) {
-            return console.error('error running query', err);
+        return console.error('error fetching client from pool', err);
         }
-        res.send(result);
+        console.log("connected to database");
+        client.query('SELECT * FROM materials_master', [], function(err, result) {
+            done();
+            if (err) {
+                return console.error('error running query', err);
+            }
+            if (result.rows.length == 0)
+            {
+                res.send(err);
+            }
+            else{
+                res.send(result.rows);
+            }
+            
+        });
+    });
+    });
+
+    router.get('/api/types', function(req, res, next) {
+    pg.connect(conString, function(err, client, done) {
+        if (err) {
+        return console.error('error fetching client from pool', err);
+        }
+        console.log("connected to database");
+        client.query('SELECT * FROM materials_type', [], function(err, result) {
+            done();
+            if (err) {
+                return console.error('error running query', err);
+            }
+            if (result.rows.length == 0)
+            {
+                res.send(err);
+            }
+            else{
+                res.send(result.rows);
+            }
+            
+        });
+    });
+    });
+
+    router.get('/api/materials:id', function(req, res, next) {
+    pg.connect(conString, function(err, client, done) {
+        if (err) {
+        return console.error('error fetching client from pool', err);
+        }
+        console.log("connected to database");
+        client.query('SELECT * FROM materials_master WHERE id_material = $1', [req.params.id], function(err, result) {
+            done();
+            if (err) {
+                return console.error('error running query', err);
+            }
+            if (result.rows.length == 0)
+            {
+                res.send(err);
+            }
+            else{
+                res.send(result.rows[0]);
+            }
+            
+        });
+    });
+    });
+
+    router.get('/api/types:id', function(req, res, next) {
+    pg.connect(conString, function(err, client, done) {
+        if (err) {
+        return console.error('error fetching client from pool', err);
+        }
+        console.log("connected to database");
+        client.query('SELECT * FROM materials_type WHERE id_materialtype = $1', [req.params.id], function(err, result) {
+            done();
+            if (err) {
+                return console.error('error running query', err);
+            }
+            if (result.rows.length == 0)
+            {
+                res.send(err);
+            }
+            else{
+                res.send(result.rows[0]);
+            }
+            
         });
     });
     });

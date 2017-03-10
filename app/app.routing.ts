@@ -17,13 +17,13 @@ const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'material', component: MaterialComponent },
-    { path: 'quantity', component: QuantityComponent },
-    { path: 'finalize', component: FinalizeComponent },
-    { path: 'dispatch', component: DispatchComponent },
-    { path: 'indicate', component: IndicateComponent },
-    { path: 'receipt', component: ReceiptComponent },
-    { path: 'confirm', component: ConfirmComponent },
+    { path: 'material', component: MaterialComponent, canActivate: [AuthGuard] },
+    { path: 'quantity', component: QuantityComponent, canActivate: [AuthGuard] },
+    { path: 'finalize', component: FinalizeComponent, canActivate: [AuthGuard] },
+    { path: 'dispatch', component: DispatchComponent, canActivate: [AuthGuard] },
+    { path: 'indicate', component: IndicateComponent, canActivate: [AuthGuard] },
+    { path: 'receipt', component: ReceiptComponent, canActivate: [AuthGuard] },
+    { path: 'confirm', component: ConfirmComponent, canActivate: [AuthGuard] },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

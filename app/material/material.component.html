@@ -4,25 +4,26 @@
     
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <ul id="nav_bar" class="nav navbar-nav">
-                <li><a href="javascript:void(0)">Select Supplier</a></li>
-                <li class="active"><a href="javascript:void(0)">Select Material</a></li>
-                <li><a href="javascript:void(0)">Order Quantities</a></li>
-                <li><a href="javascript:void(0)">Finalize</a></li>
+            <ul id="nav_bar" class="nav navbar-nav col-md-12 text-center">
+                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Select Supplier</a></li>
+                <li class="active col-md-3"><a class="col-md-12" href="javascript:void(0)">Select Material</a></li>
+                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Order Quantities</a></li>
+                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Finalize</a></li>
             </ul>
         </div>
     </nav>
 
+
     <div class="container-fluid">
         <div class="col-md-8">
-            <h4>SupplierA</h4>
+            <h4>{{ supplier.full_name }}</h4>
         </div>
         <div class="col-md-4">
             <div class="col-md-12">
-                Listing Nro : 19901923290
+                Listing Nro : {{ supplier.cuit }}
             </div>
             <div class="col-md-12">
-                Date Listed : 8/18/2015
+                Date Listed : {{ now_month }}/{{ now_date }}/{{ now_year }}
             </div>
         </div>
     </div>
@@ -38,19 +39,12 @@
                     <td>Select</td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let material of print_maters">
                 <tr>
-                    <td>0001</td>
-                    <td>brick ast</td>
-                    <td>brick</td>
-                    <td>$12</td>
-                    <td><input type="checkbox"></td>
-                </tr>
-                <tr>
-                    <td>0001</td>
-                    <td>brick ast</td>
-                    <td>brick</td>
-                    <td>$12</td>
+                    <td>{{ material.id_material }}</td>
+                    <td>{{ material.description }}</td>
+                    <td>{{ material.id_materialtype }}</td>
+                    <td>${{ material.price }}</td>
                     <td><input type="checkbox"></td>
                 </tr>
             </tbody>
