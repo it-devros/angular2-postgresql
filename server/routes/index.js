@@ -243,6 +243,212 @@ module.exports = function() {
     });
     });
 
+
+    router.post('/api/purchase_order', function(req, res, next) {
+        pg.connect(conString, function(err, client, done) {
+            if (err) {
+            return console.error('error fetching client from pool', err);
+        }
+        var timetemp = new Date();
+        var dat = timetemp.getDate();
+        var mon = timetemp.getMonth();
+        var year = timetemp.getFullYear();
+        var time = mon + "/" + dat + "/" + year;
+            console.log("connected to database");
+            client.query('INSERT INTO purchase_orders(id_supplier, date, completed, total) VALUES($1, $2, $3, $4)', [req.body.id, time, false, req.body.sum], function(err, result) {
+                done();
+                if (err) {
+                    return console.error('Some errors detected.', err);
+                }
+                res.send(result);
+                
+            });
+
+        });
+    });
+
+    router.post('/api/dispatches', function(req, res, next) {
+        pg.connect(conString, function(err, client, done) {
+            if (err) {
+            return console.error('error fetching client from pool', err);
+        }
+        
+            console.log("connected to database");
+            client.query('INSERT INTO dispatches(id_purchase_order, dispatch_date, reference ) VALUES($1, $2, $3)', [req.body.id, req.body.date, "this is ok."], function(err, result) {
+                done();
+                if (err) {
+                    return console.error('Some errors detected.', err);
+                }
+                res.send(result);
+                
+            });
+
+        });
+    });
+
+
+    router.post('/api/purchase_line', function(req, res, next) {
+        pg.connect(conString, function(err, client, done) {
+            if (err) {
+            return console.error('error fetching client from pool', err);
+            }
+            console.log("connected to database");
+
+            client.query('SELECT * FROM purchase_orders WHERE id_supplier = $1', [req.body.id_supplier], function(err, result) {
+            done();
+            if (err) {
+                return console.error('error running query', err);
+            }
+            
+            var rand_temp = Math.random();
+
+            var id_purchase = 0;
+            if(result.rows.length == 1)
+            {
+                id_purchase = result.rows[0].id_purchase_orders;
+            }
+            if(result.rows.length > 1)
+            {
+                
+                var temps = result.rows.length - 1;
+                id_purchase = result.rows[temps].id_purchase_orders;
+            }
+
+            for (var i = 0; i < req.body.materials.length ; i++)
+            {
+                rand_temp = Math.random()*1000;
+                console.log(Math.ceil(rand_temp));
+                client.query('INSERT INTO po_lines(id_purchase_order, id_line, id_material, quantity, price_unit, client) VALUES($1, $2, $3, $4, $5, $6)', [id_purchase, result.rows[0].id_purchase_orders+Math.ceil(rand_temp)+req.body.materials[i].id_material, req.body.materials[i].id_material, req.body.quantities[i], req.body.materials[i].price, req.body.client_name], function(err, result) {
+                    done();
+                    if (err) {
+                        //res.send(err);
+                        return console.error('Some errors detected.', err);
+                    }
+                    //res.send(result);
+                    
+                });
+            }
+            res.send(result);
+
+            });
+                
+        });
+    });
+
+
+    router.post('/api/dispatch_line', function(req, res, next) {
+        pg.connect(conString, function(err, client, done) {
+            if (err) {
+            return console.error('error fetching client from pool', err);
+            }
+            console.log("connected to database");
+
+            client.query('SELECT * FROM dispatches WHERE id_purchase_order = $1', [req.body.polines[0].id_purchase_order], function(err, result) {
+            done();
+            if (err) {
+                return console.error('error running query', err);
+            }
+            
+            var rand_temp = Math.random();
+
+            var id_dispatch = 0;
+            if(result.rows.length == 1)
+            {
+                id_dispatch = result.rows[0].id_dispatch;
+            }
+            if(result.rows.length > 1)
+            {
+                
+                var temps = result.rows.length - 1;
+                id_dispatch = result.rows[temps].id_dispatch;
+            }
+
+            for (var i = 0; i < req.body.polines.length ; i++)
+            {
+                rand_temp = Math.random()*1000;
+                console.log(Math.ceil(rand_temp));
+                client.query('INSERT INTO dispatch_lines(id_dispatch, id_line, id_material, quantity) VALUES($1, $2, $3, $4)', [id_dispatch, req.body.polines[i].id_line, req.body.polines[i].id_material, req.body.polines[i].quantity], function(err, result) {
+                    done();
+                    if (err) {
+                        //res.send(err);
+                        return console.error('Some errors detected.', err);
+                    }
+                    //res.send(result);
+                    
+                });
+            }
+            res.send(result);
+
+            });
+                
+        });
+    });
+
+
+    router.put('/api/updatepo', function(req, res, next) {
+    pg.connect(conString, function(err, client, done) {
+        if (err) {
+        return console.error('error fetching client from pool', err);
+        }
+        console.log("connected to database");
+        client.query('UPDATE purchase_orders SET completed = true  WHERE id_purchase_orders = $1', [req.params.id], function(err, result) {
+        done();
+        if (err) {
+            return console.error('error running query', err);
+        }
+        res.send(result);
+        });
+    });
+    });
+
+
+
+    router.get('/api/polines:email', function(req, res, next) {
+    pg.connect(conString, function(err, client, done) {
+        if (err) {
+        return console.error('error fetching client from pool', err);
+        }
+        console.log("connected to database");
+        client.query('SELECT * FROM po_lines WHERE client = $1', [req.params.email], function(err, result) {
+            done();
+            if (err) {
+                return console.error('error running query', err);
+            }
+            if (result.rows.length == 0)
+            {
+                res.send(err);
+            }
+            else{
+                res.send(result.rows);
+            }
+            
+        });
+    });
+    });
+    
+    router.get('/api/orders:id_supplier', function(req, res, next) {
+    pg.connect(conString, function(err, client, done) {
+        if (err) {
+        return console.error('error fetching client from pool', err);
+        }
+        console.log("connected to database");
+        client.query('SELECT * FROM purchase_orders WHERE id_supplier = $1 AND completed = false', [req.params.id_supplier], function(err, result) {
+            done();
+            if (err) {
+                return console.error('error running query', err);
+            }
+            if (result.rows.length == 0)
+            {
+                res.send(err);
+            }
+            else{
+                res.send(result.rows);
+            }
+            
+        });
+    });
+    });
+
     // update user
     router.put('/users/:id', function(req, res, next) {
     pg.connect(conString, function(err, client, done) {

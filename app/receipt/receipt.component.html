@@ -17,19 +17,19 @@
     <div class="container-fluid">
         <div class="col-md-6">
             <div class="col-md-12">
-                <em>SupplierA PO Date : 11/12/2016</em>
+                <b>{{ selectedSupplier.full_name }}</b> <em>PO Date : {{ selectedOrder.date }}</em>
             </div>
             <div class="col-md-12">
-                <em>PO Number : 4000023</em>
+                <em>PO Number : {{ selectedOrder.id_purchase_orders }}</em>
             </div>
         </div>
         <div class="col-md-6">
             <div id="dispatch_info" class="col-md-12">
-                <div id="dispatch_label" class="col-sm-6">
+                <div id="dispatch_label" class="col-sm-5">
                     Dispatch Date : 
                 </div>
-                <div class="col-sm-6">
-                    <input type="date" class="form form-control">
+                <div class="col-sm-7">
+                    <input type="date" class="form form-control" [(ngModel)]="dispatch_date" (ngModelChange)=setDispatch_date()>
                 </div>
                 
             </div>
@@ -38,7 +38,7 @@
                     Dispatch Number : 
                 </div>
                 <div class="col-sm-6">
-                    <input type="number" class="form form-control">
+                    <input type="number" class="form form-control" [(ngModel)]="dispatch_num" (ngModelChange)=setDispatch_num()>
                 </div>
                 
             </div>
@@ -56,28 +56,21 @@
                     <td>Entered Quantity</td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let line of polines; let i = index;">
                 <tr>
-                    <td>23423421</td>
-                    <td>It is ok.</td>
-                    <td>230423094</td>
-                    <td>124234</td>                    
-                    <td><input type="number" class="form form-control"></td>
-                </tr>
-                <tr>
-                    <td>23423421</td>
-                    <td>It is ok.</td>
-                    <td>230423094</td>
-                    <td>124234</td>                    
-                    <td><input type="number" class="form form-control"></td>
-                </tr>
+                    <td>{{ line.id_material }}</td>
+                    <td>{{ print_maters[i].description }}</td>
+                    <td>{{ line.quantity }}</td>
+                    <td><label *ngIf="entered[i] != NaN">{{ line.quantity - entered[i] }}</label></td> 
+                    <td><input type="number" class="form form-control" [(ngModel)]="entered[i]" (blur)=setEntered()></td>
+                </tr>                
             </tbody>
         </table>
     </div>
 
     <div class="container-fluid">
         <button id="btn_back" class="btn btn-primary" [routerLink]="['/indicate']">Return</button>
-        <button id="btn_continue" class="btn btn-primary" [routerLink]="['/confirm']">Continue</button>
+        <button id="btn_continue" class="btn btn-primary" (click)=goConfirm()>Continue</button>
     </div>
 
 </div>

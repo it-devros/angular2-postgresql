@@ -15,14 +15,14 @@
 
     <div class="container-fluid">
         <div class="col-md-7">
-             SupplierA PO Date : 12/11/2016
+             <b>{{ selectedSupplier.full_name }}</b> PO Date : {{ selectedOrder.date }}
         </div>
         <div class="col-md-5">
             <div class="col-md-12">
-                Dispatch Date : 12/11/2016
+                Dispatch Date : {{ dispatch_date }}
             </div>
             <div class="col-md-12">
-                Dispatch Number : 23942304
+                Dispatch Number : {{ dispatch_num }}
             </div>
         </div>
     </div>
@@ -37,24 +37,12 @@
                     <td>Pending Quantity</td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let line of polines; let i = index;">
                 <tr>
-                    <td>003403</td>
-                    <td>Brick Sta</td>
-                    <td>2934023</td>
-                    <td>23423443</td>
-                </tr>
-                <tr>
-                    <td>003403</td>
-                    <td>Brick Sta</td>
-                    <td>2934023</td>
-                    <td>23423443</td>
-                </tr>
-                <tr>
-                    <td>003403</td>
-                    <td>Brick Sta</td>
-                    <td>2934023</td>
-                    <td>23423443</td>
+                    <td>{{ line.id_material }}</td>
+                    <td>{{ print_maters[i].description }}</td>
+                    <td>{{ line.quantity }}</td>
+                    <td>{{ line.quantity - entered[i] }}</td>
                 </tr>
             </tbody>
         </table>
@@ -62,7 +50,7 @@
 
     <div class="container-fluid">
         <button id="btn_back" class="btn btn-primary" [routerLink]="['/receipt']">Back</button>
-        <button id="btn_confirm" class="btn btn-primary" [routerLink]="['/']">Confirm</button>
+        <button id="btn_confirm" class="btn btn-primary" (click)=goConfirm()>Confirm</button>
     </div>
 
 </div>

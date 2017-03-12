@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-import { User } from '../_models/index';
-import { UserService } from '../_services/index';
+import { Router, ActivatedRoute } from '@angular/router';
+import { User, Supplier } from '../_models/index';
+import { UserService, AuthenticationService, PurchaseService, AlertService } from '../_services/index';
 
 @Component({
     moduleId: module.id,
@@ -9,22 +9,55 @@ import { UserService } from '../_services/index';
 })
 
 export class DispatchComponent implements OnInit {
-    currentUser: User;
+    currentUser: any;
+    // suppliers: Supplier[] = [];
+    suppliers: Supplier[] = [];
     users: User[] = [];
+    selected_flag: number;
+    
 
-    constructor(private userService: UserService) {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    constructor(
+                private route: ActivatedRoute,
+                private router: Router,
+                private alert: AlertService,
+                private userService: UserService,
+                private auth: AuthenticationService,
+                private purchase: PurchaseService) {
+        console.log(localStorage.getItem('currentUser'));
+        // this.currentUser = localStorage.getItem('currentUser');
+        let user = JSON.parse(localStorage.getItem('currentUser'));
+        console.log(user);
+        this.currentUser = user;
+        this.purchase.getSuppliers().subscribe(
+            data => { 
+                this.suppliers = data
+            },
+            error => {
+                this.alert.error('There are no suppliers.');
+            });
+        // this.currentUser = this.auth.getCurrentUser();
+        this.selected_flag = 0;
     }
 
     ngOnInit() {
-        this.loadAllUsers();
+        
     }
 
-    deleteUser(id: number) {
-        this.userService.delete(id).subscribe(() => { this.loadAllUsers() });
+    selectSupplier(selected_supplier: any) {
+        console.log(selected_supplier);
+        localStorage.setItem('selectedSupplier', JSON.stringify(selected_supplier));
+        this.selected_flag = 1;
     }
 
-    private loadAllUsers() {
-        this.userService.getAll().subscribe(users => { this.users = users; });
+    goIndicate() {
+        if(this.selected_flag == 1)
+        {
+            this.router.navigate(['/indicate']);
+        }
+        else
+        {
+            this.alert.error('You must select a supplier.');
+        }
     }
+
 }

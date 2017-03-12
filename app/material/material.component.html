@@ -20,10 +20,10 @@
         </div>
         <div class="col-md-4">
             <div class="col-md-12">
-                Listing Nro : {{ supplier.cuit }}
+                Listing User No : {{ supplier.cuit }}
             </div>
             <div class="col-md-12">
-                Date Listed : {{ now_month }}/{{ now_date }}/{{ now_year }}
+                Date Listed : {{ now_month+1 }}/{{ now_date }}/{{ now_year }}
             </div>
         </div>
     </div>
@@ -45,14 +45,14 @@
                     <td>{{ material.description }}</td>
                     <td>{{ material.id_materialtype }}</td>
                     <td>${{ material.price }}</td>
-                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox" (click)=setMaterial(material.id_material)></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
     <div class="container-fluid">
-        <button id="btn_continue" class="btn btn-primary" [routerLink]="['/quantity']">Continue</button>
+        <button id="btn_continue" class="btn btn-primary" (click)=goQuantity()>Continue</button>
     </div>
 
 </div>

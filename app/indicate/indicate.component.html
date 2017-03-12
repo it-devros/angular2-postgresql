@@ -25,28 +25,22 @@
                     <td>Select</td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let order of orders">
                 <tr>
-                    <td>23423421</td>
-                    <td>230423094</td>
-                    <td>12/22/2015</td>
-                    <td>$ 190129302093</td>
-                    <td><input type="radio" class=""></td>
+                    <td>{{ selectedSupplier.cuit }}</td>
+                    <td>{{ order.id_purchase_orders }}</td>
+                    <td>{{ order.date }}</td>
+                    <td>$ {{ order.total }}</td>
+                    <td><input class="radio" name="optradio" type="radio" (click)=selectOrder(order)></td>
                 </tr>
-                <tr>
-                    <td>23423421</td>
-                    <td>230423094</td>
-                    <td>12/22/2015</td>
-                    <td>$ 190129302093</td>
-                    <td><input type="radio" class=""></td>
-                </tr>
+                
             </tbody>
         </table>
     </div>
 
     <div class="container-fluid">
         <button id="btn_back" class="btn btn-primary" [routerLink]="['/dispatch']">Return</button>
-        <button id="btn_continue" class="btn btn-primary" [routerLink]="['/receipt']">Continue</button>
+        <button id="btn_continue" class="btn btn-primary" (click)=goReceipt()>Continue</button>
     </div>
 
 </div>

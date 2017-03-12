@@ -40,5 +40,14 @@ thead {
 }
 
 li {
+    padding: 0px !important;
+}
+
+
+li.active.col-md-3 > a {
+    background-color:#337ab7 !important;
+}
+
+ul {
     padding-right: 0px !important;
 }

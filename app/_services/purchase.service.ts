@@ -39,4 +39,34 @@ export class PurchaseService {
         return this.http.get('http://localhost:3000/api/types' + typeID).map((response: Response) => response.json());
     }
 
+    savePurchase(id: number, sum: number) {
+        console.log("save-ok");
+        return this.http.post('http://localhost:3000/api/purchase_order', { 'id':id, 'sum': sum }).map((response: Response) => response.json());
+    }
+
+    saveLine(materials: any[], quantities: any[], id_supplier: number, client_name: any) {
+        console.log("save-line");
+        return this.http.post('http://localhost:3000/api/purchase_line', { 'materials': materials, 'quantities':quantities, 'id_supplier': id_supplier, 'client_name':client_name }).map((response: Response) => response.json());
+    }
+
+    getPolinesByemail(email: any) {
+        return this.http.get('http://localhost:3000/api/polines' + email).map((response: Response) => response.json());
+    }
+
+    getOrderBySupplier(id_supplier: any) {
+        return this.http.get('http://localhost:3000/api/orders' + id_supplier).map((response: Response) => response.json());
+    }
+
+    savedispatch(id: any, date: any) {
+        return this.http.post('http://localhost:3000/api/dispatches', { 'id':id, 'date':date }).map((response: Response) => response.json());
+    }
+
+    savedispatchline(polines: any[]) {
+        return this.http.post('http://localhost:3000/api/dispatch_line', { 'polines': polines }).map((response: Response) => response.json());
+    }
+
+    updatePO(id: any) {
+        return this.http.put('http://localhost:3000/api/updatepo', { 'id': id }).map((response: Response) => response.json());
+    }
+
 }

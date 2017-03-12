@@ -15,14 +15,14 @@
 
     <div class="container-fluid">
         <div class="col-md-8">
-            <h4>New Order : SupplierA</h4>
+            <h4>New Order : {{ supplier.full_name }}</h4>
         </div>
         <div class="col-md-4">
             <div class="col-md-12">
-                Total Amount : $2930203
+                Total Amount : ${{ sum }}
             </div>
             <div class="col-md-12">
-                Date : 3/20/2017
+                Date : {{ now_month+1 }}/{{ now_date }}/{{ now_year }}
             </div>
         </div>
     </div>
@@ -37,32 +37,21 @@
                     <td>Quantity</td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let material of materials; let i = index;">
                 <tr>
-                    <td>003403</td>
-                    <td>Brick Sta</td>
-                    <td>sldiwo32</td>
-                    <td>39</td>
+                    <td>{{ material.id_material }}</td>
+                    <td>{{ material.description }}</td>
+                    <td>{{ material.id_materialtype }}</td>
+                    <td>{{ p_quantity[i] }}</td>
                 </tr>
-                <tr>
-                    <td>003403</td>
-                    <td>Brick Sta</td>
-                    <td>sldiwo32</td>
-                    <td>39</td>
-                </tr>
-                <tr>
-                    <td>003403</td>
-                    <td>Brick Sta</td>
-                    <td>sldiwo32</td>
-                    <td>39</td>
-                </tr>
+                
             </tbody>
         </table>
     </div>
 
     <div class="container-fluid">
         <button id="btn_back" class="btn btn-primary" [routerLink]="['/quantity']">Back</button>
-        <button id="btn_confirm" class="btn btn-primary" [routerLink]="['/']">Confirm</button>
+        <button id="btn_confirm" class="btn btn-primary" (click)=goConfirm()>Confirm</button>
     </div>
 
 </div>

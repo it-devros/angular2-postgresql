@@ -15,14 +15,14 @@
 
     <div class="container-fluid">
         <div class="col-md-8">
-            <h4>New Order : SupplierA</h4>
+            <h4>New Order : {{ supplier.full_name }}</h4>
         </div>
         <div class="col-md-4">
             <div class="col-md-12">
-                Total Amount : $2930203
+                Total Amount : ${{ sum }}
             </div>
             <div class="col-md-12">
-                Date : 3/20/2017
+                Date : {{ now_month+1 }}/{{ now_date }}/{{ now_year }}
             </div>
         </div>
     </div>
@@ -39,33 +39,31 @@
                     <td>TOT</td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let material of materials; let i = index;">
                 <tr>
-                    <td>0001</td>
-                    <td>brick ast</td>
-                    <td>brick</td>
-                    <td>$12</td>
+                    <td>{{ material.id_material }}</td>
+                    <td>{{ material.description }}</td>
+                    <td>{{ material.id_materialtype }}</td>
                     <td>
-                        <input type="number" class="form form-control" value="quantity">
+                        ${{ material.price }}
                     </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>0001</td>
-                    <td>brick ast</td>
-                    <td>brick</td>
-                    <td>$12</td>
                     <td>
-                        <input type="number" class="form form-control" value="quantity">
+                        <input class="form form-control" type="number" [(ngModel)]="p_quantity[i]" (blur)=setSum(p_quantity[i])>
                     </td>
-                    <td></td>
+                    <td>
+                        $<label *ngIf="p_quantity[i] != NaN">
+                            {{ p_quantity[i] * material.price }}
+                            </label>
+                        <label *ngIf="p_quantity[i] == NaN">0</label>
+                    </td>
                 </tr>
+                
             </tbody>
         </table>
     </div>
 
     <div class="container-fluid">
-        <button id="btn_continue" class="btn btn-primary" [routerLink]="['/finalize']">Continue</button>
+        <button id="btn_continue" class="btn btn-primary"  (click)=goFinalize()>Continue</button>
     </div>
 
 </div>

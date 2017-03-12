@@ -27,23 +27,20 @@
                     <td>Select</td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let supplier of suppliers">
+
                 <tr>
-                    <td>0001</td>
-                    <td>supplier A </td>
-                    <td><input type="radio" class=""></td>
+                    <td>{{ supplier.cuit }}</td>
+                    <td>{{ supplier.full_name }}</td>
+                    <td><input class="radio" name="optradio" type="radio" (click)=selectSupplier(supplier)></td>
                 </tr>
-                <tr>
-                    <td>0001</td>
-                    <td>supplier A </td>
-                    <td><input type="radio" class=""></td>
-                </tr>
+                
             </tbody>
         </table>
     </div>
 
     <div class="container-fluid">
-        <button id="btn_continue" class="btn btn-primary" [routerLink]="['/indicate']">Continue</button>
+        <button id="btn_continue" class="btn btn-primary" (click)=goIndicate()>Continue</button>
     </div>
 
 </div>

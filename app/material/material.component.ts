@@ -24,8 +24,12 @@ export class MaterialComponent implements OnInit {
     types: any[] = [];
     type_mater: any[] = [];
     print_maters: any[] = [];
+    flag_set: any[] = [];
+   
 
     constructor(
+            private route: ActivatedRoute,
+            private router: Router,
             private alert: AlertService,
             private purchase: PurchaseService,
             private userService: UserService) {
@@ -39,16 +43,11 @@ export class MaterialComponent implements OnInit {
 
         this.getData(this.supplier.id_suppliers).subscribe((data) =>{
             data[0].forEach((d:any) => {
-                this.id_sup_mater = d.id_material; 
+                this.id_sup_mater.push(d.id_material); 
             });
 
             this.materials = data[1];
             this.types = data[2];
-
-            console.log("id_supplier", this.id_sup_mater);
-            console.log("materials", this.materials);
-            console.log("types", this.types);
-
 
             this.materials.forEach((m :any) => {
                 if(this.id_sup_mater.includes(m.id_material)) {
@@ -66,11 +65,12 @@ export class MaterialComponent implements OnInit {
             });
             console.log("print", this.print_maters);
         });
-        
+       
     }
 
     ngOnInit() {
         this.loadAllUsers();
+        
     }
 
     deleteUser(id: number) {
@@ -91,4 +91,33 @@ export class MaterialComponent implements OnInit {
             return data;
         });
     }
+
+    setMaterial(id: any) {
+        if (this.flag_set.includes(id))
+        {
+            let flag_set_temp = this.flag_set.filter((element: any) => {
+                return element != id;
+            });
+            this.flag_set = flag_set_temp;
+        }
+        else
+        {
+            this.flag_set.push(id);
+        }
+        console.log("flag", this.flag_set);
+    }
+
+    goQuantity() {
+        if(this.flag_set.length == 0)
+        {
+            this.alert.error('You must select at least one Material.');
+        }
+        else
+        {
+            localStorage.setItem('selectedMaterialsID', JSON.stringify(this.flag_set));
+            this.router.navigate(['/quantity']);
+            
+        }
+    }
+
 }
