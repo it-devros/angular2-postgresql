@@ -1,1 +1,1 @@
-export * from './indicate.component';
+export * from './indicate.component'

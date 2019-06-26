@@ -34,10 +34,10 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE dispatch_lines (
-    id_dispatch bigint NOT NULL,
-    id_line bigint NOT NULL,
-    id_material bigint NOT NULL,
-    quantity numeric(10,0) NOT NULL
+  id_dispatch bigint NOT NULL,
+  id_line bigint NOT NULL,
+  id_material bigint NOT NULL,
+  quantity numeric(10,0) NOT NULL
 );
 
 
@@ -48,10 +48,10 @@ ALTER TABLE public.dispatch_lines OWNER TO postgres;
 --
 
 CREATE TABLE dispatches (
-    id_dispatch bigint NOT NULL,
-    id_purchase_order bigint NOT NULL,
-    dispatch_date date NOT NULL,
-    reference text NOT NULL
+  id_dispatch bigint NOT NULL,
+  id_purchase_order bigint NOT NULL,
+  dispatch_date date NOT NULL,
+  reference text NOT NULL
 );
 
 
@@ -62,11 +62,11 @@ ALTER TABLE public.dispatches OWNER TO postgres;
 --
 
 CREATE SEQUENCE dispatches_id_dispatch_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+  START WITH 1
+  INCREMENT BY 1
+  NO MINVALUE
+  NO MAXVALUE
+  CACHE 1;
 
 
 ALTER TABLE public.dispatches_id_dispatch_seq OWNER TO postgres;
@@ -83,12 +83,12 @@ ALTER SEQUENCE dispatches_id_dispatch_seq OWNED BY dispatches.id_dispatch;
 --
 
 CREATE TABLE materials_master (
-    id_material bigint NOT NULL,
-    description character varying(80) NOT NULL,
-    reserved boolean,
-    datechanged date NOT NULL,
-    price numeric(10,2) NOT NULL,
-    id_materialtype bigint NOT NULL
+  id_material bigint NOT NULL,
+  description character varying(80) NOT NULL,
+  reserved boolean,
+  datechanged date NOT NULL,
+  price numeric(10,2) NOT NULL,
+  id_materialtype bigint NOT NULL
 );
 
 
@@ -99,8 +99,8 @@ ALTER TABLE public.materials_master OWNER TO postgres;
 --
 
 CREATE TABLE materials_type (
-    id_materialtype bigint NOT NULL,
-    description character varying(80) NOT NULL
+  id_materialtype bigint NOT NULL,
+  description character varying(80) NOT NULL
 );
 
 
@@ -111,11 +111,11 @@ ALTER TABLE public.materials_type OWNER TO postgres;
 --
 
 CREATE SEQUENCE materials_type_id_materialtype_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+  START WITH 1
+  INCREMENT BY 1
+  NO MINVALUE
+  NO MAXVALUE
+  CACHE 1;
 
 
 ALTER TABLE public.materials_type_id_materialtype_seq OWNER TO postgres;
@@ -132,12 +132,12 @@ ALTER SEQUENCE materials_type_id_materialtype_seq OWNED BY materials_type.id_mat
 --
 
 CREATE TABLE po_lines (
-    id_purchase_order bigint NOT NULL,
-    id_line bigint NOT NULL,
-    id_material bigint NOT NULL,
-    quantity numeric(10,0) NOT NULL,
-    price_unit numeric(10,2) NOT NULL,
-    client character varying(80) DEFAULT 'qwe'::character varying NOT NULL
+  id_purchase_order bigint NOT NULL,
+  id_line bigint NOT NULL,
+  id_material bigint NOT NULL,
+  quantity numeric(10,0) NOT NULL,
+  price_unit numeric(10,2) NOT NULL,
+  client character varying(80) DEFAULT 'qwe'::character varying NOT NULL
 );
 
 
@@ -148,11 +148,11 @@ ALTER TABLE public.po_lines OWNER TO postgres;
 --
 
 CREATE TABLE purchase_orders (
-    id_purchase_orders bigint NOT NULL,
-    id_supplier bigint NOT NULL,
-    date date NOT NULL,
-    completed boolean,
-    total bigint DEFAULT 3430040 NOT NULL
+  id_purchase_orders bigint NOT NULL,
+  id_supplier bigint NOT NULL,
+  date date NOT NULL,
+  completed boolean,
+  total bigint DEFAULT 3430040 NOT NULL
 );
 
 
@@ -163,11 +163,11 @@ ALTER TABLE public.purchase_orders OWNER TO postgres;
 --
 
 CREATE SEQUENCE purchase_orders_id_purchase_orders_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+  START WITH 1
+  INCREMENT BY 1
+  NO MINVALUE
+  NO MAXVALUE
+  CACHE 1;
 
 
 ALTER TABLE public.purchase_orders_id_purchase_orders_seq OWNER TO postgres;
@@ -184,11 +184,11 @@ ALTER SEQUENCE purchase_orders_id_purchase_orders_seq OWNED BY purchase_orders.i
 --
 
 CREATE TABLE stock (
-    id_stock bigint NOT NULL,
-    id_material bigint NOT NULL,
-    quantity numeric(10,2),
-    minimum numeric(10,2) NOT NULL,
-    reserved numeric(10,2) NOT NULL
+  id_stock bigint NOT NULL,
+  id_material bigint NOT NULL,
+  quantity numeric(10,2),
+  minimum numeric(10,2) NOT NULL,
+  reserved numeric(10,2) NOT NULL
 );
 
 
@@ -199,11 +199,11 @@ ALTER TABLE public.stock OWNER TO postgres;
 --
 
 CREATE SEQUENCE stock_id_stock_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+  START WITH 1
+  INCREMENT BY 1
+  NO MINVALUE
+  NO MAXVALUE
+  CACHE 1;
 
 
 ALTER TABLE public.stock_id_stock_seq OWNER TO postgres;
@@ -220,12 +220,12 @@ ALTER SEQUENCE stock_id_stock_seq OWNED BY stock.id_stock;
 --
 
 CREATE TABLE suppliers (
-    id_suppliers bigint NOT NULL,
-    full_name character varying(50) NOT NULL,
-    address character varying(80) NOT NULL,
-    contact text NOT NULL,
-    cuit numeric(11,0) NOT NULL,
-    active boolean
+  id_suppliers bigint NOT NULL,
+  full_name character varying(50) NOT NULL,
+  address character varying(80) NOT NULL,
+  contact text NOT NULL,
+  cuit numeric(11,0) NOT NULL,
+  active boolean
 );
 
 
@@ -236,11 +236,11 @@ ALTER TABLE public.suppliers OWNER TO postgres;
 --
 
 CREATE SEQUENCE suppliers_id_suppliers_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+  START WITH 1
+  INCREMENT BY 1
+  NO MINVALUE
+  NO MAXVALUE
+  CACHE 1;
 
 
 ALTER TABLE public.suppliers_id_suppliers_seq OWNER TO postgres;
@@ -257,9 +257,9 @@ ALTER SEQUENCE suppliers_id_suppliers_seq OWNED BY suppliers.id_suppliers;
 --
 
 CREATE TABLE suppliers_materials (
-    id_supplier bigint NOT NULL,
-    id_material bigint NOT NULL,
-    price numeric(10,2) NOT NULL
+  id_supplier bigint NOT NULL,
+  id_material bigint NOT NULL,
+  price numeric(10,2) NOT NULL
 );
 
 
@@ -270,12 +270,12 @@ ALTER TABLE public.suppliers_materials OWNER TO postgres;
 --
 
 CREATE TABLE users (
-    id_user bigint NOT NULL,
-    first_name character varying(50) NOT NULL,
-    last_name character varying(50) NOT NULL,
-    email character varying(80) NOT NULL,
-    password text NOT NULL,
-    address text NOT NULL
+  id_user bigint NOT NULL,
+  first_name character varying(50) NOT NULL,
+  last_name character varying(50) NOT NULL,
+  email character varying(80) NOT NULL,
+  password text NOT NULL,
+  address text NOT NULL
 );
 
 
@@ -286,11 +286,11 @@ ALTER TABLE public.users OWNER TO postgres;
 --
 
 CREATE SEQUENCE users_id_user_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+  START WITH 1
+  INCREMENT BY 1
+  NO MINVALUE
+  NO MAXVALUE
+  CACHE 1;
 
 
 ALTER TABLE public.users_id_user_seq OWNER TO postgres;
@@ -501,7 +501,7 @@ SELECT pg_catalog.setval('users_id_user_seq', 11, true);
 --
 
 ALTER TABLE ONLY dispatch_lines
-    ADD CONSTRAINT dispatch_lines_pkey PRIMARY KEY (id_dispatch, id_line);
+  ADD CONSTRAINT dispatch_lines_pkey PRIMARY KEY (id_dispatch, id_line);
 
 
 --
@@ -509,7 +509,7 @@ ALTER TABLE ONLY dispatch_lines
 --
 
 ALTER TABLE ONLY dispatches
-    ADD CONSTRAINT dispatches_pkey PRIMARY KEY (id_dispatch);
+  ADD CONSTRAINT dispatches_pkey PRIMARY KEY (id_dispatch);
 
 
 --
@@ -517,7 +517,7 @@ ALTER TABLE ONLY dispatches
 --
 
 ALTER TABLE ONLY materials_master
-    ADD CONSTRAINT materials_master_pkey PRIMARY KEY (id_material);
+  ADD CONSTRAINT materials_master_pkey PRIMARY KEY (id_material);
 
 
 --
@@ -525,7 +525,7 @@ ALTER TABLE ONLY materials_master
 --
 
 ALTER TABLE ONLY materials_type
-    ADD CONSTRAINT materials_type_pkey PRIMARY KEY (id_materialtype);
+  ADD CONSTRAINT materials_type_pkey PRIMARY KEY (id_materialtype);
 
 
 --
@@ -533,7 +533,7 @@ ALTER TABLE ONLY materials_type
 --
 
 ALTER TABLE ONLY po_lines
-    ADD CONSTRAINT po_lines_pkey PRIMARY KEY (id_purchase_order, id_line);
+  ADD CONSTRAINT po_lines_pkey PRIMARY KEY (id_purchase_order, id_line);
 
 
 --
@@ -541,7 +541,7 @@ ALTER TABLE ONLY po_lines
 --
 
 ALTER TABLE ONLY purchase_orders
-    ADD CONSTRAINT purchase_orders_pkey PRIMARY KEY (id_purchase_orders);
+  ADD CONSTRAINT purchase_orders_pkey PRIMARY KEY (id_purchase_orders);
 
 
 --
@@ -549,7 +549,7 @@ ALTER TABLE ONLY purchase_orders
 --
 
 ALTER TABLE ONLY stock
-    ADD CONSTRAINT stock_pkey PRIMARY KEY (id_stock);
+  ADD CONSTRAINT stock_pkey PRIMARY KEY (id_stock);
 
 
 --
@@ -557,7 +557,7 @@ ALTER TABLE ONLY stock
 --
 
 ALTER TABLE ONLY suppliers_materials
-    ADD CONSTRAINT suppliers_materials_pkey PRIMARY KEY (id_supplier, id_material);
+  ADD CONSTRAINT suppliers_materials_pkey PRIMARY KEY (id_supplier, id_material);
 
 
 --
@@ -565,7 +565,7 @@ ALTER TABLE ONLY suppliers_materials
 --
 
 ALTER TABLE ONLY suppliers
-    ADD CONSTRAINT suppliers_pkey PRIMARY KEY (id_suppliers);
+  ADD CONSTRAINT suppliers_pkey PRIMARY KEY (id_suppliers);
 
 
 --
@@ -573,7 +573,7 @@ ALTER TABLE ONLY suppliers
 --
 
 ALTER TABLE ONLY users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (id_user);
+  ADD CONSTRAINT users_pkey PRIMARY KEY (id_user);
 
 
 --

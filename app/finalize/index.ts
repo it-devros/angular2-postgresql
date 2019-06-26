@@ -1,1 +1,1 @@
-export * from './finalize.component';
+export * from './finalize.component'

@@ -1,1 +1,1 @@
-export * from './dispatch.component';
+export * from './dispatch.component'

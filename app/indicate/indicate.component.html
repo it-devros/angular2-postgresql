@@ -1,46 +1,46 @@
 
 <div class="col-md-12">
-    <a [routerLink]="['/']"><h2>Hi {{ currentUser.first_name }}!</h2></a>
-    <p>You can dispatch goods receipt right now.<a style="float: right;" [routerLink]="['/login']">Logout</a></p>
-    
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <ul id="nav_bar" class="nav navbar-nav col-md-12 text-center">
-                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Select Supplier</a></li>
-                <li class="active col-md-3"><a class="col-md-12" href="javascript:void(0)">Indicate Order</a></li>
-                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Goods Receipt</a></li>
-                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Confirm</a></li>
-            </ul>
-        </div>
-    </nav>
-
+  <a [routerLink]="['/']"><h2>Hi {{ currentUser.first_name }}!</h2></a>
+  <p>You can dispatch goods receipt right now.<a style="float: right;" [routerLink]="['/login']">Logout</a></p>
+  
+  <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <td>Suppliers</td>
-                    <td>PO Numbers</td>
-                    <td>Date</td>
-                    <td>Total</td>
-                    <td>Select</td>
-                </tr>
-            </thead>
-            <tbody *ngFor="let order of orders">
-                <tr>
-                    <td>{{ selectedSupplier.cuit }}</td>
-                    <td>{{ order.id_purchase_orders }}</td>
-                    <td>{{ order.date }}</td>
-                    <td>$ {{ order.total }}</td>
-                    <td><input class="radio" name="optradio" type="radio" (click)=selectOrder(order)></td>
-                </tr>
-                
-            </tbody>
-        </table>
+      <ul id="nav_bar" class="nav navbar-nav col-md-12 text-center">
+        <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Select Supplier</a></li>
+        <li class="active col-md-3"><a class="col-md-12" href="javascript:void(0)">Indicate Order</a></li>
+        <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Goods Receipt</a></li>
+        <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Confirm</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <div class="container-fluid">
-        <button id="btn_back" class="btn btn-primary" [routerLink]="['/dispatch']">Return</button>
-        <button id="btn_continue" class="btn btn-primary" (click)=goReceipt()>Continue</button>
-    </div>
+  <div class="container-fluid">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <td>Suppliers</td>
+          <td>PO Numbers</td>
+          <td>Date</td>
+          <td>Total</td>
+          <td>Select</td>
+        </tr>
+      </thead>
+      <tbody *ngFor="let order of orders">
+        <tr>
+          <td>{{ selectedSupplier.cuit }}</td>
+          <td>{{ order.id_purchase_orders }}</td>
+          <td>{{ order.date }}</td>
+          <td>$ {{ order.total }}</td>
+          <td><input class="radio" name="optradio" type="radio" (click)=selectOrder(order)></td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container-fluid">
+    <button id="btn_back" class="btn btn-primary" [routerLink]="['/dispatch']">Return</button>
+    <button id="btn_continue" class="btn btn-primary" (click)=goReceipt()>Continue</button>
+  </div>
 
 </div>

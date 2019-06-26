@@ -1,58 +1,58 @@
 <div class="col-md-12">
-    <a [routerLink]="['/']"><h2>Hi {{ currentUser.first_name }}!</h2></a>
-    <p>You can purchase order right now.<a style="float: right;" [routerLink]="['/login']">Logout</a></p>
-    
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <ul id="nav_bar" class="nav navbar-nav col-md-12 text-center">
-                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Select Supplier</a></li>
-                <li class="active col-md-3"><a class="col-md-12" href="javascript:void(0)">Select Material</a></li>
-                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Order Quantities</a></li>
-                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Finalize</a></li>
-            </ul>
-        </div>
-    </nav>
-
-
+  <a [routerLink]="['/']"><h2>Hi {{ currentUser.first_name }}!</h2></a>
+  <p>You can purchase order right now.<a style="float: right;" [routerLink]="['/login']">Logout</a></p>
+  
+  <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <div class="col-md-8">
-            <h4>{{ supplier.full_name }}</h4>
-        </div>
-        <div class="col-md-4">
-            <div class="col-md-12">
-                Listing User No : {{ supplier.cuit }}
-            </div>
-            <div class="col-md-12">
-                Date Listed : {{ now_month+1 }}/{{ now_date }}/{{ now_year }}
-            </div>
-        </div>
+      <ul id="nav_bar" class="nav navbar-nav col-md-12 text-center">
+        <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Select Supplier</a></li>
+        <li class="active col-md-3"><a class="col-md-12" href="javascript:void(0)">Select Material</a></li>
+        <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Order Quantities</a></li>
+        <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Finalize</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <div class="container-fluid">
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <td>Code</td>
-                    <td>Materials</td>
-                    <td>Material Types</td>
-                    <td>Price</td>
-                    <td>Select</td>
-                </tr>
-            </thead>
-            <tbody *ngFor="let material of print_maters">
-                <tr>
-                    <td>{{ material.id_material }}</td>
-                    <td>{{ material.description }}</td>
-                    <td>{{ material.id_materialtype }}</td>
-                    <td>${{ material.price }}</td>
-                    <td><input type="checkbox" (click)=setMaterial(material.id_material)></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
-    <div class="container-fluid">
-        <button id="btn_continue" class="btn btn-primary" (click)=goQuantity()>Continue</button>
+  <div class="container-fluid">
+    <div class="col-md-8">
+      <h4>{{ supplier.full_name }}</h4>
     </div>
+    <div class="col-md-4">
+      <div class="col-md-12">
+        Listing User No : {{ supplier.cuit }}
+      </div>
+      <div class="col-md-12">
+        Date Listed : {{ now_month+1 }}/{{ now_date }}/{{ now_year }}
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <td>Code</td>
+          <td>Materials</td>
+          <td>Material Types</td>
+          <td>Price</td>
+          <td>Select</td>
+        </tr>
+      </thead>
+      <tbody *ngFor="let material of print_maters">
+        <tr>
+          <td>{{ material.id_material }}</td>
+          <td>{{ material.description }}</td>
+          <td>{{ material.id_materialtype }}</td>
+          <td>${{ material.price }}</td>
+          <td><input type="checkbox" (click)=setMaterial(material.id_material)></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container-fluid">
+    <button id="btn_continue" class="btn btn-primary" (click)=goQuantity()>Continue</button>
+  </div>
 
 </div>

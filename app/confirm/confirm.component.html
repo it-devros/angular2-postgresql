@@ -1,56 +1,56 @@
 <div class="col-md-12">
-    <a [routerLink]="['/']"><h2>Hi {{ currentUser.first_name }}!</h2></a>
-    <p>You can dispatch goods receipt right now.<a style="float: right;" [routerLink]="['/login']">Logout</a></p>
-    
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <ul id="nav_bar" class="nav navbar-nav col-md-12 text-center">
-                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Select Supplier</a></li>
-                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Indicate Order</a></li>
-                <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Goods Receipt</a></li>
-                <li class="active col-md-3"><a class="col-md-12" href="javascript:void(0)">Confirm</a></li>
-            </ul>
-        </div>
-    </nav>
-
+  <a [routerLink]="['/']"><h2>Hi {{ currentUser.first_name }}!</h2></a>
+  <p>You can dispatch goods receipt right now.<a style="float: right;" [routerLink]="['/login']">Logout</a></p>
+  
+  <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <div class="col-md-7">
-             <b>{{ selectedSupplier.full_name }}</b> PO Date : {{ selectedOrder.date }}
-        </div>
-        <div class="col-md-5">
-            <div class="col-md-12">
-                Dispatch Date : {{ dispatch_date }}
-            </div>
-            <div class="col-md-12">
-                Dispatch Number : {{ dispatch_num }}
-            </div>
-        </div>
+      <ul id="nav_bar" class="nav navbar-nav col-md-12 text-center">
+        <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Select Supplier</a></li>
+        <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Indicate Order</a></li>
+        <li class="col-md-3"><a class="col-md-12" href="javascript:void(0)">Goods Receipt</a></li>
+        <li class="active col-md-3"><a class="col-md-12" href="javascript:void(0)">Confirm</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <div class="container-fluid">
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <td>Material Number</td>
-                    <td>Description</td>
-                    <td>Requested Quantity</td>
-                    <td>Pending Quantity</td>
-                </tr>
-            </thead>
-            <tbody *ngFor="let line of polines; let i = index;">
-                <tr>
-                    <td>{{ line.id_material }}</td>
-                    <td>{{ print_maters[i].description }}</td>
-                    <td>{{ line.quantity }}</td>
-                    <td>{{ line.quantity - entered[i] }}</td>
-                </tr>
-            </tbody>
-        </table>
+  <div class="container-fluid">
+    <div class="col-md-7">
+       <b>{{ selectedSupplier.full_name }}</b> PO Date : {{ selectedOrder.date }}
     </div>
+    <div class="col-md-5">
+      <div class="col-md-12">
+        Dispatch Date : {{ dispatch_date }}
+      </div>
+      <div class="col-md-12">
+        Dispatch Number : {{ dispatch_num }}
+      </div>
+    </div>
+  </div>
 
-    <div class="container-fluid">
-        <button id="btn_back" class="btn btn-primary" [routerLink]="['/receipt']">Back</button>
-        <button id="btn_confirm" class="btn btn-primary" (click)=goConfirm()>Confirm</button>
-    </div>
+  <div class="container-fluid">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <td>Material Number</td>
+          <td>Description</td>
+          <td>Requested Quantity</td>
+          <td>Pending Quantity</td>
+        </tr>
+      </thead>
+      <tbody *ngFor="let line of polines; let i = index;">
+        <tr>
+          <td>{{ line.id_material }}</td>
+          <td>{{ print_maters[i].description }}</td>
+          <td>{{ line.quantity }}</td>
+          <td>{{ line.quantity - entered[i] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container-fluid">
+    <button id="btn_back" class="btn btn-primary" [routerLink]="['/receipt']">Back</button>
+    <button id="btn_confirm" class="btn btn-primary" (click)=goConfirm()>Confirm</button>
+  </div>
 
 </div>
