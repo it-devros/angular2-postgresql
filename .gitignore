@@ -2,7 +2,6 @@
 logs
 *.log
 npm-debug.log*
-
 # Runtime data
 pids
 *.pid
@@ -27,6 +26,7 @@ coverage
 build/Release
 
 # Dependency directories
+package-lock.json
 node_modules
 jspm_packages
 typings
